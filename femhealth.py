@@ -189,7 +189,8 @@ def initialize_session_state():
 def navigate_to(page):
     """Navigate between pages."""
     st.session_state.page = page
-    st.experimental_rerun()
+    st.rerun()
+
 
 def add_sidebar_navigation():
     """Add sidebar navigation options."""
