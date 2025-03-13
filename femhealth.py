@@ -10,15 +10,15 @@ import os
 from datetime import datetime, timedelta
 import random
 
-# Configure page settings
+
 st.set_page_config(
-    page_title="HormonyAI: Personalized Cycle Tracking",
+    page_title="FemHealth: Personalized Cycle Tracking",
     page_icon="🌸",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Enhanced CSS for dark mode compatibility
+
 st.markdown("""
 <style>
     .stApp {
@@ -48,7 +48,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Default user data (since we're removing login/signup)
 DEFAULT_USER_DATA = {
     'name': 'User',
     'age': 25,
@@ -69,7 +68,7 @@ DEFAULT_USER_DATA = {
     'chat_history': []
 }
 
-# Persistent Storage
+
 def save_user_data(user_data):
     """Save user data to a JSON file."""
     try:
@@ -88,7 +87,7 @@ def load_user_data():
         st.error(f"Error loading user data: {e}")
     return DEFAULT_USER_DATA
 
-# Period Prediction Function
+
 def predict_next_period(last_period_start, average_cycle_length):
     """
     Predict the next period start and end dates
@@ -173,10 +172,9 @@ def initialize_gemini_api(api_key):
         st.error(f"Failed to initialize Gemini API: {e}")
         return False
 
-# Initialize session state
 def initialize_session_state():
     """Initialize session state variables."""
-    # Default states
+ 
     default_states = {
         'page': 'dashboard',
         'gemini_api_key': None,
@@ -187,7 +185,7 @@ def initialize_session_state():
         if key not in st.session_state:
             st.session_state[key] = value
 
-# Navigation functions
+
 def navigate_to(page):
     """Navigate between pages."""
     st.session_state.page = page
@@ -207,7 +205,7 @@ def add_sidebar_navigation():
     if st.sidebar.button("AI Assistant"):
         navigate_to("ai_assistant")
     
-    # Gemini API Key Input
+   
     st.sidebar.header("🔑 Gemini API Key")
     api_key = st.sidebar.text_input(
         "Enter your Gemini API Key", 
@@ -216,7 +214,6 @@ def add_sidebar_navigation():
         help="Get your API key from Google AI Studio"
     )
     
-    # Validate API Key if provided
     if api_key:
         if initialize_gemini_api(api_key):
             st.session_state.gemini_api_key = api_key
@@ -224,14 +221,13 @@ def add_sidebar_navigation():
         else:
             st.session_state.gemini_api_key = None
 
-# Dashboard Page
+
 def dashboard_page():
     """Render user dashboard."""
     user_data = st.session_state.user_data
     
     st.title(f"Welcome, {user_data['name']}! 👋")
 
-    # Prediction Section
     st.subheader("Your Next Period Prediction")
     last_period = user_data['cycle_data']['last_period_start']
     avg_cycle_length = user_data['cycle_data'].get('average_cycle_length', 28)
@@ -244,16 +240,16 @@ def dashboard_page():
         with col2:
             st.metric("Next Period End", prediction['predicted_end'])
             
-    # Display recent symptoms if available
+ 
     if user_data['cycle_data']['symptoms']:
         st.subheader("Recent Symptoms")
         symptoms_list = []
         for symptom, dates in user_data['cycle_data']['symptoms'].items():
-            if dates:  # If there are dates recorded for this symptom
+            if dates: 
                 symptoms_list.append(f"{symptom.capitalize()} (last recorded: {dates[-1]})")
         
         if symptoms_list:
-            for symptom in symptoms_list[:3]:  # Show only the 3 most recent symptoms
+            for symptom in symptoms_list[:3]:  
                 st.write(f"• {symptom}")
             
             if len(symptoms_list) > 3:
@@ -261,7 +257,6 @@ def dashboard_page():
                 
             st.button("Manage Symptoms", on_click=lambda: navigate_to("track_symptoms"))
 
-    # Add sidebar navigation
     add_sidebar_navigation()
 
 # Period Tracking Page
@@ -668,14 +663,13 @@ def ai_assistant_page():
                     save_user_data(user_data)
                     st.session_state.user_data = user_data
                     
-                    st.experimental_rerun()  # Refresh to show the new messages
+                    st.experimental_rerun() 
                 except Exception as e:
                     st.error(f"Error communicating with AI Assistant: {e}")
     
-    # Add sidebar navigation
+
     add_sidebar_navigation()
 
-# Main App Function
 def main():
     """Main application function."""
     initialize_session_state()
@@ -692,6 +686,6 @@ def main():
     elif st.session_state.page == 'ai_assistant':
         ai_assistant_page()
 
-# Run the main application
+
 if __name__ == "__main__":
     main()
