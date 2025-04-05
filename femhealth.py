@@ -627,7 +627,7 @@ def ai_assistant_page():
                 save_user_data(user_data)
                 st.session_state.user_data = user_data
                 
-                st.experimental_rerun()  # Refresh to show the new messages
+                st.rerun() # Refresh to show the new messages
             except Exception as e:
                 st.error(f"Error communicating with AI Assistant: {e}")
         
@@ -635,7 +635,7 @@ def ai_assistant_page():
             user_data['chat_history'] = []
             save_user_data(user_data)
             st.session_state.user_data = user_data
-            st.experimental_rerun()
+            st.rerun()
     
     with col2:
         st.subheader("Quick Questions")
@@ -664,7 +664,7 @@ def ai_assistant_page():
                     save_user_data(user_data)
                     st.session_state.user_data = user_data
                     
-                    st.experimental_rerun() 
+                    st.rerun() 
                 except Exception as e:
                     st.error(f"Error communicating with AI Assistant: {e}")
     
