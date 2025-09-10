@@ -1,5 +1,5 @@
 
-🌸 FemHealth
+# FemHealth
 ![logo](https://github.com/user-attachments/assets/8f791998-4813-4888-80d6-d722806feb59)
 
 FemHealth is an AI-powered menstrual health tracking app designed to help individuals track, understand, and manage their cycles without stigma.
@@ -15,25 +15,6 @@ It goes beyond simple period tracking by offering:
 💬 Supportive Guidance – Ask AI about managing period pain, self-care tips, and health concerns
 
 🌍 Safe Space – Built for those in cultures where talking about menstruation is taboo
-
-✨ Features
-
-Period & Symptom Log: Keep a record of your cycles, pain, and emotional health.
-
-AI Chat Support: Confidentially ask questions about periods, pain relief, or related health topics.
-
-Health Metrics: Track sleep patterns, stress levels, and lifestyle factors.
-
-Personalized Insights: AI provides wellness tips based on your logs.
-
-Privacy First: Your data stays yours, with a focus on safe and stigma-free support.
-
-🚀 Getting Started
-
-Clone the repository:
-
-git clone https://github.com/yourusername/femhealth.git
-cd femhealth
 
 📸 Screenshots
 
